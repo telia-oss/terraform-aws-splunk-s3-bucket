@@ -1,8 +1,13 @@
+provider "aws" {
+  version = "1.30.0"
+  region  = "eu-west-1"
+}
+
 module "log-bucket" {
-  source  = "telia-oss/splunk-s3-bucket/aws"
+  source  = "../.."
   version = "1.0.0"
 
+  bucket = "some-bucket"
   read_access_account = "123456789"
-  log_bucket_name = "shared-log-bucket"
   aws_organization_id = "o-your-organization-id"
 }
