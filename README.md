@@ -1,6 +1,6 @@
 # S3 bucket and support infrastructure for Splunk SQS based S3 ingestion.
 
-This module creates an s3 bucket and other components (SNS, SQS, IAM) that can hold files to be ingested by Splunk using [SQS Based S3 ingestion](http://docs.splunk.com/Documentation/AddOns/released/AWS/SQS-basedS3)
+This module creates an S3 bucket and other components (SNS, SQS, IAM) needed for  Splunk to ingest objects with [SQS Based S3 ingestion](http://docs.splunk.com/Documentation/AddOns/released/AWS/SQS-basedS3)
 
 # Notes 
 
