@@ -24,7 +24,7 @@ resource "aws_s3_bucket" "this" {
 // S3 Bucket or access logs to the main bucket 
 resource "aws_s3_bucket" "logs" {
   bucket = "${var.bucket}-log"
-  acl    = "private"
+  acl    = "log-delivery-write"
   tags   = "${var.tags}"
 }
 
