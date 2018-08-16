@@ -2,8 +2,9 @@
 
 This module creates an S3 bucket and other components (SNS, SQS, IAM) needed for  Splunk to ingest objects with [SQS Based S3 ingestion](http://docs.splunk.com/Documentation/AddOns/released/AWS/SQS-basedS3)
 
-# Notes 
+It requires the Splunk environment to be hosed in AWS. 
 
+# Notes 
 
 * All accounts in the AWS organization given by the aws_organization_id can put objects in the created bucket
 * One dedicated account has read access to the bucket. This will typically be the AWS account hosting Splunk
