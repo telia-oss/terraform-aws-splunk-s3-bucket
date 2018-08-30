@@ -39,8 +39,6 @@ variable "amz_access_log_accounts" {
   default = {
     eu-west-1 = 156460612806
   }
+
   type = "map"
 }
-
-
-

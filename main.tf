@@ -21,8 +21,6 @@ resource "aws_s3_bucket" "this" {
   tags = "${var.tags}"
 }
 
-
-
 // S3 Bucket or access logs to the main bucket 
 resource "aws_s3_bucket" "logs" {
   bucket = "${var.bucket}-log"
@@ -33,9 +31,7 @@ resource "aws_s3_bucket" "logs" {
 // Policy for the bucket with READ and LIST permissions given to the read access account, Other accounts
 // Belonging to the organizaion are only allowed to Put objects to this bucket .
 
-data "aws_caller_identity" "current" {
-
-}
+data "aws_caller_identity" "current" {}
 
 data "aws_region" "current" {}
 
