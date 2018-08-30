@@ -21,6 +21,8 @@ resource "aws_s3_bucket" "this" {
   tags = "${var.tags}"
 }
 
+
+
 // S3 Bucket or access logs to the main bucket 
 resource "aws_s3_bucket" "logs" {
   bucket = "${var.bucket}-log"
@@ -30,6 +32,12 @@ resource "aws_s3_bucket" "logs" {
 
 // Policy for the bucket with READ and LIST permissions given to the read access account, Other accounts
 // Belonging to the organizaion are only allowed to Put objects to this bucket .
+
+data "aws_caller_identity" "current" {
+
+}
+
+data "aws_region" "current" {}
 
 resource "aws_s3_bucket_policy" "this" {
   bucket = "${aws_s3_bucket.this.id}"
@@ -69,7 +77,42 @@ resource "aws_s3_bucket_policy" "this" {
          "Resource": [
             "arn:aws:s3:::${var.bucket}/*"
          ]
+      },
+     {
+      "Effect": "Allow",
+      "Principal": {
+         "AWS": "arn:aws:iam::${lookup(var.amz_access_log_accounts, data.aws_region.current.name)}:root"
+      },
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::${var.bucket}/*"
+     },
+     {
+      "Sid": "AWSConfigBucketPermissionsCheck",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": [
+         "config.amazonaws.com"
+        ]
+      },
+      "Action": "s3:GetBucketAcl",
+      "Resource": "arn:aws:s3:::${var.bucket}"
+    },
+    {
+      "Sid": " AWSConfigBucketDelivery",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": [
+         "config.amazonaws.com"
+        ]
+      },
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::${var.bucket}/AWSLogs/${data.aws_caller_identity.current.account_id}/Config/*",
+      "Condition": {
+        "StringEquals": {
+          "s3:x-amz-acl": "bucket-owner-full-control"
+        }
       }
+    }
    ]
 }
 POLICY
