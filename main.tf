@@ -106,7 +106,7 @@ resource "aws_s3_bucket_policy" "this" {
         ]
       },
       "Action": "s3:PutObject",
-      "Resource": "arn:aws:s3:::${var.bucket}/AWSLogs/${data.aws_caller_identity.current.account_id}/Config/*",
+      "Resource": "arn:aws:s3:::${var.bucket}/AWSLogs/*",
       "Condition": {
         "StringEquals": {
           "s3:x-amz-acl": "bucket-owner-full-control"
