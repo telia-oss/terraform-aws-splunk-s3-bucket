@@ -11,3 +11,10 @@ It requires the Splunk environment to be hosed in AWS.
 * A separate bucket for S3 Access logs will be created
 * The module provisions SQS and SNS resources and required policies. You can override attributes of the SQS queue by changing variables. 
 * The bucket is created with a default and customizable lifecycle policy that removes items after seven days.  
+
+# Permissions
+
+The bucket created by this module wil also allow Elastic Load Balancers in the same region to write it's access 
+logs to the bucket 
+
+The bucket policy also allows the AWS ConfigService to write put objects to the bucket. 
