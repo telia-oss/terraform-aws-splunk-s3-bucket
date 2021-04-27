@@ -4,7 +4,7 @@ provider "aws" {
 
 module "log-bucket" {
   source = "../.."
-  
+
 
   bucket              = "some-bucket"
   read_access_account = "123456789"
