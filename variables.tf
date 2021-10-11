@@ -31,7 +31,7 @@ variable "sqs_receive_wait_time_seconds" {
 }
 
 variable "tags" {
-  type    = "map"
+  type    = map(any)
   default = {}
 }
 
@@ -40,5 +40,5 @@ variable "amz_access_log_accounts" {
     eu-west-1 = 156460612806
   }
 
-  type = "map"
+  type = map(any)
 }
